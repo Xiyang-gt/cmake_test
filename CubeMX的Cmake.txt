@@ -1,0 +1,54 @@
+cmake_minimum_required(VERSION 3.22)  
+  
+# 这个文件仅生成一次，之后可以随意修改  
+  
+# 编译器设置  
+set(CMAKE_CXX_STANDARD 23)  
+set(CMAKE_CXX_STANDARD_REQUIRED ON)  
+set(CMAKE_CXX_EXTENSIONS OFF)  
+  
+# 默认构建类型  
+if(NOT CMAKE_BUILD_TYPE)  
+    set(CMAKE_BUILD_TYPE "Debug")  
+endif()  
+  
+# 项目名称（可自行修改）  
+set(CMAKE_PROJECT_NAME CppProject)  
+  
+# 导出编译数据库，方便 clangd 等工具索引  
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)  
+  
+# 项目设置  
+project(${CMAKE_PROJECT_NAME} LANGUAGES CXX)  
+message("Build type: " ${CMAKE_BUILD_TYPE})  
+  
+# 可执行文件  
+add_executable(${CMAKE_PROJECT_NAME}  
+        main.cpp  
+        # 入口源文件，按需调整  
+)  
+  
+# 链接目录（如有第三方库路径，请在此添加）  
+target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE  
+        # 自定义库搜索路径  
+)  
+  
+# 额外源文件（如需拆分源文件，可在此添加）  
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE  
+        # 追加自己的源文件  
+)  
+  
+# 头文件搜索路径  
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE  
+        include  # 示例：公共头文件目录  
+        # 追加自定义头文件路径)  
+  
+# 宏定义  
+target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE  
+        # 在此添加自定义宏  
+)  
+  
+# 链接库  
+target_link_libraries(${CMAKE_PROJECT_NAME}  
+        # 在此添加需要链接的库  
+)
